@@ -128,8 +128,8 @@ resource "aws_security_group" "sec_groups" {
   }
 }
 
-resource "aws_iam_role" "EKSClusterRole" {
-  name = "EKSClusterRole"
+resource "aws_iam_role" "EKSClusterRoleR" {
+  name = "EKSClusterRoleR"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -162,7 +162,7 @@ resource "aws_iam_role" "NodeGroupRole" {
 
 resource "aws_iam_role_policy_attachment" "AmazonEKSClusterPolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
-  role       = aws_iam_role.EKSClusterRole.name
+  role       = aws_iam_role.EKSClusterRoleR.name
 }
 
 resource "aws_iam_role_policy_attachment" "AmazonEKSWorkerNodePolicy" {
@@ -182,7 +182,7 @@ resource "aws_iam_role_policy_attachment" "AmazonEKS_CNI_Policy" {
 
 resource "aws_eks_cluster" "eks-cluster" {
   name     = var.eks_cluster_name
-  role_arn = aws_iam_role.EKSClusterRole.arn
+  role_arn = aws_iam_role.EKSClusterRoleR.arn
   version  = "1.21"
 
   vpc_config {

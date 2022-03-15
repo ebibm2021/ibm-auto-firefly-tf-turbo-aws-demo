@@ -25,7 +25,7 @@ variable "vpc_cidr_block" {
 
 variable "subnets_azs" {
   type    = list(string)
-  default = ["ap-south-1", "ap-south-1"]
+  default = ["ap-south-1a", "ap-south-1b"]
 }
 
 variable "public_subnets" {
