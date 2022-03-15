@@ -1,3 +1,13 @@
+variable "aws_access_key" {
+  type    = string
+  default = "none"
+}
+
+variable "aws_secret_key" {
+  type    = string
+  default = "none"
+}
+
 variable "vpc_name" {
   type    = string
   default = "terraform-vpc"
