@@ -197,7 +197,7 @@ resource "aws_eks_cluster" "eks-cluster" {
 
 resource "aws_eks_node_group" "node-ec2" {
   cluster_name    = aws_eks_cluster.eks-cluster.name
-  node_group_name = "t3_micro-node_group"
+  node_group_name = "t2_medium-node_group"
   node_role_arn   = aws_iam_role.NodeGroupRole.arn
   subnet_ids      = flatten([aws_subnet.private_subnets[*].id])
 
@@ -208,7 +208,7 @@ resource "aws_eks_node_group" "node-ec2" {
   }
 
   ami_type       = "AL2_x86_64"
-  instance_types = ["t3.micro"]
+  instance_types = ["t2.medium"]
   capacity_type  = "ON_DEMAND"
   disk_size      = 20
 
