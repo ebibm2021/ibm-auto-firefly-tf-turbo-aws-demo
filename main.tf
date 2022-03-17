@@ -214,37 +214,9 @@ resource "aws_eks_cluster" "eks-cluster" {
   ]
 }
 
-resource "aws_eks_node_group" "node-ec2-1" {
+resource "aws_eks_node_group" "node-ec2" {
   cluster_name    = aws_eks_cluster.eks-cluster.name
   node_group_name = "t2_medium-node_group"
-  node_role_arn   = aws_iam_role.NodeGroupRole.arn
-  subnet_ids      = flatten([aws_subnet.private_subnets[*].id])
-
-  scaling_config {
-    desired_size = 1
-    max_size     = 3
-    min_size     = 1
-  }
-
-  tags = {
-    resource_identifier_for_turbo_firefly = "turbo_firefly_aws_eks_node_group-1"
-  }
-
-  ami_type       = "AL2_x86_64"
-  instance_types = ["t2.medium"]
-  capacity_type  = "ON_DEMAND"
-  disk_size      = 20
-
-  depends_on = [
-    aws_iam_role_policy_attachment.AmazonEKSWorkerNodePolicy,
-    aws_iam_role_policy_attachment.AmazonEC2ContainerRegistryReadOnly,
-    aws_iam_role_policy_attachment.AmazonEKS_CNI_Policy
-  ]
-}
-
-resource "aws_eks_node_group" "node-ec2-2" {
-  cluster_name    = aws_eks_cluster.eks-cluster.name
-  node_group_name = "t2_micro-node_group"
   node_role_arn   = aws_iam_role.NodeGroupRole.arn
   subnet_ids      = flatten([aws_subnet.private_subnets[*].id])
 
@@ -255,11 +227,11 @@ resource "aws_eks_node_group" "node-ec2-2" {
   }
 
   tags = {
-    resource_identifier_for_turbo_firefly = "turbo_firefly_aws_eks_node_group-2"
+    resource_identifier_for_turbo_firefly = "turbo_firefly_aws_eks_node_group"
   }
 
   ami_type       = "AL2_x86_64"
-  instance_types = ["t2.micro"]
+  instance_types = ["t2.medium"]
   capacity_type  = "ON_DEMAND"
   disk_size      = 20
 
