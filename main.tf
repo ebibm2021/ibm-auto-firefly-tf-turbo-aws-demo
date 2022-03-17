@@ -10,9 +10,6 @@ resource "aws_vpc" "custom_vpc" {
 
   tags = {
     resource_identifier_for_turbo_firefly = "turbo_firefly_aws_vpc"
-  }
-
-  tags = {
     Name = var.vpc_name
   }
 }
