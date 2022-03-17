@@ -50,7 +50,6 @@ resource "aws_internet_gateway" "i_gateway" {
 }
 
 resource "aws_internet_gateway" "extra_gateway" {
-  vpc_id = aws_vpc.custom_vpc.id
 
   tags = {
     Name = "extra_gateway"
