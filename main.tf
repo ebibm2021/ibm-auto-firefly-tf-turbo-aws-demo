@@ -9,6 +9,10 @@ resource "aws_vpc" "custom_vpc" {
   cidr_block = var.vpc_cidr_block
 
   tags = {
+    resource_identifier_for_turbo_firefly = "turbo_firefly_aws_vpc"
+  }
+
+  tags = {
     Name = var.vpc_name
   }
 }
@@ -109,6 +113,10 @@ resource "aws_security_group" "sec_groups" {
   name        = var.security_group_name
   description = var.security_group_description
   vpc_id      = aws_vpc.custom_vpc.id
+    
+  tags = {
+    resource_identifier_for_turbo_firefly = "turbo_firefly_aws_security_group"
+  }
 
   ingress {
     description      = var.ingress_description
@@ -130,6 +138,11 @@ resource "aws_security_group" "sec_groups" {
 
 resource "aws_iam_role" "EKSClusterRoleR" {
   name = "EKSClusterRoleR"
+
+  tags = {
+    resource_identifier_for_turbo_firefly = "turbo_firefly_aws_iam_role_cluster_role"
+  }
+
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -146,6 +159,11 @@ resource "aws_iam_role" "EKSClusterRoleR" {
 
 resource "aws_iam_role" "NodeGroupRole" {
   name = "EKSNodeGroupRole"
+
+  tags = {
+    resource_identifier_for_turbo_firefly = "turbo_firefly_aws_iam_role_group_role"
+  }
+
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -185,6 +203,10 @@ resource "aws_eks_cluster" "eks-cluster" {
   role_arn = aws_iam_role.EKSClusterRoleR.arn
   version  = "1.21"
 
+  tags = {
+    resource_identifier_for_turbo_firefly = "turbo_firefly_aws_eks_cluster"
+  }
+
   vpc_config {
     subnet_ids         = flatten([[aws_subnet.public_subnets[*].id], [aws_subnet.private_subnets[*].id]])
     security_group_ids = [aws_security_group.sec_groups.id]
@@ -196,6 +218,7 @@ resource "aws_eks_cluster" "eks-cluster" {
 }
 
 resource "aws_eks_node_group" "node-ec2" {
+  name            = aws_eks_cluster.eks-cluster.name
   cluster_name    = aws_eks_cluster.eks-cluster.name
   node_group_name = "t2_medium-node_group"
   node_role_arn   = aws_iam_role.NodeGroupRole.arn
@@ -205,6 +228,10 @@ resource "aws_eks_node_group" "node-ec2" {
     desired_size = 2
     max_size     = 3
     min_size     = 1
+  }
+
+  tags = {
+    resource_identifier_for_turbo_firefly = "turbo_firefly_aws_eks_node_group"
   }
 
   ami_type       = "AL2_x86_64"
