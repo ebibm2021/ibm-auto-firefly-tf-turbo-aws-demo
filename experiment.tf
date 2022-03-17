@@ -32,10 +32,3 @@ resource "aws_internet_gateway" "another_extra_gateway" {
     Name = "another_extra_gateway"
   }
 }
-
-resource "aws_internet_gateway" "yet_another_extra_gateway" {
-
-  tags = {
-    Name = "yet_another_extra_gateway"
-  }
-}
