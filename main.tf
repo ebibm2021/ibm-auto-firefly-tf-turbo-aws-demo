@@ -241,3 +241,10 @@ resource "aws_eks_node_group" "node-ec2" {
     aws_iam_role_policy_attachment.AmazonEKS_CNI_Policy
   ]
 }
+
+resource "aws_iam_policy" "arn:aws:iam::013450454822:policy/FireflyReadonlyPolicy" {
+  description = "Read only permission for the cloud configuration"
+  name        = "FireflyReadonlyPolicy"
+  path        = "/"
+  policy      = "{\"Statement\":[{\"Action\":[\"apigateway:GET\",\"cloudwatch:ListDashboards\",\"cloudwatch:GetDashboard\",\"codebuild:BatchGetProjects\",\"ec2:SearchTransitGatewayRoutes\",\"eks:ListNodegroups\",\"eks:ListFargateProfiles\",\"eks:ListTagsForResource\",\"eks:DescribeNodegroup\",\"eks:DescribeFargateProfile\",\"states:DescribeStateMachine\",\"states:ListStateMachines\",\"states:ListTagsForResource\",\"sns:ListSubscriptionsByTopic\",\"sns:ListTopics\",\"sns:ListSubscriptions\",\"ses:GetIdentityMailFromDomainAttributes\",\"ses:GetIdentityVerificationAttributes\",\"sns:GetSubscriptionAttributes\",\"ses:GetIdentityDkimAttributes\",\"ses:ListIdentities\",\"elasticfilesystem:DescribeLifecycleConfiguration\",\"ecr-public:ListTagsForResource\",\"ecr:DescribeRepositories\",\"appconfig:ListApplications\",\"appconfig:ListTagsForResource\",\"eks:ListIdentityProviderConfigs\",\"eks:DescribeIdentityProviderConfig\",\"eks:ListAddons\",\"eks:DescribeAddon\",\"elasticfilesystem:DescribeAccessPoints\",\"elasticfilesystem:ListTagsForResource\",\"s3:ListBucket\"],\"Effect\":\"Allow\",\"Resource\":\"*\"},{\"Action\":[\"s3:GetObject\"],\"Effect\":\"Allow\",\"Resource\":\"arn:aws:s3:::*/*.tfstate\"}],\"Version\":\"2012-10-17\"}"
+}
