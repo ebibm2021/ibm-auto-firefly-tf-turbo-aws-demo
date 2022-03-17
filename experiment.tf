@@ -34,7 +34,7 @@ resource "aws_internet_gateway" "another_extra_gateway" {
 }
 
 resource "aws_iam_role" "a_dummy_role" {
-  name = "EKSClusterRoleR"
+  name = "a_dummy_role"
 
   tags = {
     resource_identifier_for_turbo_firefly = "turbo_firefly_a_dummy_role"
@@ -55,7 +55,7 @@ resource "aws_iam_role" "a_dummy_role" {
 }
 
 resource "aws_iam_role" "another_dummy_role" {
-  name = "EKSNodeGroupRole"
+  name = "another_dummy_role"
 
   tags = {
     resource_identifier_for_turbo_firefly = "turbo_firefly_another_dummy_role"
@@ -76,7 +76,7 @@ resource "aws_iam_role" "another_dummy_role" {
 }
 
 resource "aws_iam_role" "yet_another_dummy_role" {
-  name = "EKSNodeGroupRole"
+  name = "yet_another_dummy_role"
 
   tags = {
     resource_identifier_for_turbo_firefly = "turbo_firefly_yet_another_dummy_role"
