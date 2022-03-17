@@ -49,13 +49,6 @@ resource "aws_internet_gateway" "i_gateway" {
   }
 }
 
-resource "aws_internet_gateway" "extra_gateway" {
-
-  tags = {
-    Name = "extra_gateway"
-  }
-}
-
 # EIPs
 resource "aws_eip" "elastic_ip" {
   count      = var.private_subnets == null || var.nat_gateways == false ? 0 : length(var.private_subnets)
