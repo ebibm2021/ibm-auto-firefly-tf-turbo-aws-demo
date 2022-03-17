@@ -32,3 +32,66 @@ resource "aws_internet_gateway" "another_extra_gateway" {
     Name = "another_extra_gateway"
   }
 }
+
+resource "aws_iam_role" "a_dummy_role" {
+  name = "EKSClusterRoleR"
+
+  tags = {
+    resource_identifier_for_turbo_firefly = "turbo_firefly_a_dummy_role"
+  }
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Principal = {
+          Service = "eks.amazonaws.com"
+        }
+      },
+    ]
+  })
+}
+
+resource "aws_iam_role" "another_dummy_role" {
+  name = "EKSNodeGroupRole"
+
+  tags = {
+    resource_identifier_for_turbo_firefly = "turbo_firefly_another_dummy_role"
+  }
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+      },
+    ]
+  })
+}
+
+esource "aws_iam_role" "yet_another_dummy_role" {
+  name = "EKSNodeGroupRole"
+
+  tags = {
+    resource_identifier_for_turbo_firefly = "turbo_firefly_yet_another_dummy_role"
+  }
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+      },
+    ]
+  })
+}
