@@ -215,7 +215,6 @@ resource "aws_eks_cluster" "eks-cluster" {
 }
 
 resource "aws_eks_node_group" "node-ec2" {
-  name            = aws_eks_cluster.eks-cluster.name
   cluster_name    = aws_eks_cluster.eks-cluster.name
   node_group_name = "t2_medium-node_group"
   node_role_arn   = aws_iam_role.NodeGroupRole.arn
