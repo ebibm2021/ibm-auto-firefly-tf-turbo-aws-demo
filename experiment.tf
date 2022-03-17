@@ -75,7 +75,7 @@ resource "aws_iam_role" "another_dummy_role" {
   })
 }
 
-esource "aws_iam_role" "yet_another_dummy_role" {
+resource "aws_iam_role" "yet_another_dummy_role" {
   name = "EKSNodeGroupRole"
 
   tags = {
