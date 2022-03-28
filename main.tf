@@ -233,11 +233,30 @@ resource "aws_eks_node_group" "node-ec2" {
   ami_type       = "AL2_x86_64"
   instance_types = ["t2.medium"]
   capacity_type  = "ON_DEMAND"
-  disk_size      = 20
 
   depends_on = [
     aws_iam_role_policy_attachment.AmazonEKSWorkerNodePolicy,
     aws_iam_role_policy_attachment.AmazonEC2ContainerRegistryReadOnly,
     aws_iam_role_policy_attachment.AmazonEKS_CNI_Policy
   ]
+}
+
+resource "aws_launch_template" "aws_custom_launch_template" {
+  name = "aws_custom_launch_template"
+
+  block_device_mappings {
+    device_name = "/dev/xvda"
+
+    ebs {
+      volume_size = 25
+      volume_type = "standard"
+      delete_on_termination = "true"
+    }
+  }
+
+  cpu_options {
+    core_count       = 4
+    threads_per_core = 2
+  }
+
 }
