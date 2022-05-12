@@ -5,7 +5,7 @@ resource "aws_vpc" "a_dummy_vpc" {
   
   tags = {
     resource_identifier_for_turbo_firefly = "turbo_firefly_a_dummy_vpc"
-    Name = "a_dummy_vpc_adasdasdasdasd_YOGHC2TZM1O0M2KUFDL3"
+    Name = "a_dummy_vpc_{"stats":{"currentValue": "$action.compoundActions[0].currentValue","newValue": "$action.compoundActions[0].newValue","valueUnits": "$action.compoundActions[0].valueUnits","resizeAttribute": "$action.compoundActions[0].resizeAttribute","reasonCommodity": "$action.compoundActions[0].risk.reasonCommodity"}_IMN4S1WM58V5FLHH69Y1"
   }
 }
 
